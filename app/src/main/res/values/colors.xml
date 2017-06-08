@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#7c2f09</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorFontDefault">#2b2b2b</color>
+
+    <color name="miniAudioGreen">#c8e589</color>
+    <color name="miniAudioRed">#FF5B64</color>
+    <color name="miniAudioGrey">#e0e0e0</color>
+</resources>
