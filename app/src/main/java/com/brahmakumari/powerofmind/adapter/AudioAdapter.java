@@ -83,26 +83,20 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewInfoHold
             @Override
             public void onClick(View v)
             {
-                String audpath = null;
-                audpath =  "/Internal storage/Android/data/com.brahmakumari.powerofmind/Music"+File.separator + "" + audios.get(position).getAudio_title() + ".mp3";
                 int count=0;
                 String audioId=audios.get(position).get_id();
 
                 for(int i = 0; i< presentAudioIds.size(); i++)
                 {
-                    Log.i("Demo: ","ABCDEFGHhtdheh"+i);
                     if (audioId.equals(presentAudioIds.get(i)))
                     {
-                        Log.i("Demo: ","ABCD");
                         count++;
                         break;
                     }
-                    Log.i("Demo: ","ABCDEFGH"+i);
                 }
                 if(count==0)
                 {
                     Uri uri = Uri.parse(ctx.getString(R.string.server_url) + audios.get(position).getAudio_path());
-                    Log.i("Demo: ","In Download");
 
                     // Create request for the download manager
                     DownloadManager downloadManager = (DownloadManager) ctx.getSystemService(DOWNLOAD_SERVICE);
@@ -116,7 +110,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewInfoHold
 
                     //Set the local destination for the downloaded file to a path within the application's external files directory
 
-                    request.setDestinationUri(Uri.parse(audpath));
+                    request.setDestinationInExternalFilesDir(ctx,Environment.DIRECTORY_MUSIC,audios.get(position).getAudio_desc()+".mp3");
 
                     //Enqueue download and save into referenceId
                     long downloadReference = downloadManager.enqueue(request);
@@ -126,7 +120,6 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewInfoHold
 
                     try {
                         sharedPreferences.edit().putString("audioId",ObjectSerializer.serialize(presentAudioIds)).apply();
-                        Log.i("Demo: ","SavingInSP"+presentAudioIds.toString());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -134,33 +127,6 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewInfoHold
                 else
                 {
                     Toast.makeText(ctx,"Already Downloaded",Toast.LENGTH_LONG).show();
-                    Log.i("Demo: ","In ELSE");
-                    //String filePath = Environment.getDataDirectory()+"files/Music/"+audios.get(position).getAudio_title()+".mp3";
-                    //Log.i("Demo:",""+filePath);
-                    //AssetFileDescriptor afd = getAssets.
-
-                    File aud_file= new File(audpath);
-                    try {
-                        FileInputStream filestream = new FileInputStream(aud_file);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    // String file=Environment.DIRECTORY_MUSIC+audios.get(position).getAudio_title() + ".mp3";
-                    try {
-                        Log.i("Demo:","in Try" );
-
-                        mediaPlayer.setDataSource(aud_file.getAbsolutePath());
-                        mediaPlayer.prepareAsync();
-                        mediaPlayer.start();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    // mediaPlayer=MediaPlayer.create(ctx, Uri.parse(Environment.DIRECTORY_MUSIC+audios.get(position).getAudio_title() + ".mp3"));
-                    Log.i("Demo:",""+aud_file.getAbsolutePath());
-                    //mediaPlayer.start();
                 }
             }
         });

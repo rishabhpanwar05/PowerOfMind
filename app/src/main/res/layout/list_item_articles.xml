@@ -14,6 +14,17 @@
         card_view:cardPreventCornerOverlap="false">
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/cast_album_art_placeholder" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/relativeLayoutOverArticle"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,7 +33,6 @@
                 android:id="@+id/article_title_tv"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_alignParentBottom="false"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:text="Article Title"
@@ -34,7 +44,8 @@
                 android:id="@+id/article_desc_tv"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:background="@android:color/white"
                 android:gravity="center"
                 android:text="Article Description"
