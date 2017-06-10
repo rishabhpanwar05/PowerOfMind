@@ -17,16 +17,19 @@ import com.brahmakumari.powerofmind.ui.fragment.AudioFragment;
 import com.brahmakumari.powerofmind.ui.fragment.ArticlesFragment;
 import com.brahmakumari.powerofmind.ui.fragment.CentreLocatorFragment;
 import com.brahmakumari.powerofmind.ui.fragment.DarshanFragment;
+import com.brahmakumari.powerofmind.ui.fragment.EventsFragment;
 import com.brahmakumari.powerofmind.ui.fragment.HomeFragment;
 import com.brahmakumari.powerofmind.ui.fragment.MessageFragment;
 import com.brahmakumari.powerofmind.ui.fragment.NewsFragment;
+import com.brahmakumari.powerofmind.ui.fragment.NewsandEventsFragment;
 import com.brahmakumari.powerofmind.ui.fragment.VideoFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener,
 ArticlesFragment.OnFragmentInteractionListener,CentreLocatorFragment.OnFragmentInteractionListener,
 DarshanFragment.OnFragmentInteractionListener,MessageFragment.OnFragmentInteractionListener ,
-NewsFragment.OnFragmentInteractionListener,VideoFragment.OnFragmentInteractionListener,AudioFragment.OnFragmentInteractionListener{
+        NewsandEventsFragment.OnFragmentInteractionListener,VideoFragment.OnFragmentInteractionListener,
+        AudioFragment.OnFragmentInteractionListener,NewsFragment.OnFragmentInteractionListener,EventsFragment.OnFragmentInteractionListener{
 
 
     @Override
@@ -81,7 +84,7 @@ NewsFragment.OnFragmentInteractionListener,VideoFragment.OnFragmentInteractionLi
         } else if (id == R.id.nav_audio) {
             fragment = new AudioFragment();
         } else if (id == R.id.nav_news) {
-            fragment = new NewsFragment();
+            fragment = new NewsandEventsFragment();
         } else if (id == R.id.nav_darshan) {
             fragment = new DarshanFragment();
         } else if (id == R.id.nav_centre) {

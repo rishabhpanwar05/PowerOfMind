@@ -9,7 +9,9 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/miniconstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true">
 
         <ImageView
             android:id="@+id/homeimageView"
@@ -187,51 +189,54 @@
             app:layout_constraintLeft_toLeftOf="@+id/homeimageView"
             app:layout_constraintTop_toTopOf="@+id/homeimageView" />
 
-
     </android.support.constraint.ConstraintLayout>
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView2"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/miniconstraintLayout"
-        android:layout_below="@+id/miniconstraintLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+    <RelativeLayout
+        android:id="@+id/scrollviews_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/thoughttextView">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_mini_video"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            android:layout_height="120dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/mini_audio_ScrollView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_above="@+id/mini_audio_ScrollView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-        </android.support.v7.widget.RecyclerView>
-    </HorizontalScrollView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_mini_video"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp">
+            </android.support.v7.widget.RecyclerView>
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="105dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/horizontalScrollView2"
-        android:visibility="visible"
-        android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/thoughttextView"
-        app:layout_constraintLeft_toLeftOf="parent">
+        </HorizontalScrollView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_mini_audio"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <HorizontalScrollView
+            android:id="@+id/mini_audio_ScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:visibility="visible"
+            android:layout_marginTop="2dp"
+            app:layout_constraintLeft_toLeftOf="parent">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_mini_audio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
 
-    </HorizontalScrollView>
+        </HorizontalScrollView>
+
+    </RelativeLayout>
 
     <TextView
         android:layout_marginTop="0dp"
@@ -251,10 +256,9 @@
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="20sp"
-        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>

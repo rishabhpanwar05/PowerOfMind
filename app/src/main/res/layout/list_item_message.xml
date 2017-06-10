@@ -9,30 +9,58 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/message_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentTop="false"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="false"
-            android:layout_margin="5dp"
-            android:text="12 APRIL 2017" />
+        <RelativeLayout
+            android:id="@+id/date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/divider"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#ffffff"
+                android:paddingEnd="5dp"
+                android:paddingStart="5dp"
+                android:text="08-06-2017"
+                android:textAlignment="center" />
+
+        </RelativeLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/msg_constraintlayout"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/message_date"
-            android:layout_toLeftOf="@+id/share_btn"
-            android:layout_toStartOf="@+id/share_btn">
+            android:layout_below="@+id/date_layout"
+            android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/share_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="2dp"
+                android:background="@mipmap/ic_share"
+                android:onClick="share"
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintLeft_toRightOf="@+id/message_details"
+                android:layout_marginLeft="8dp" />
 
             <ImageView
                 android:id="@+id/message_bckgrnd"
@@ -43,10 +71,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
-                android:layout_marginRight="8dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                tools:layout_editor_absoluteX="16dp" />
 
             <TextView
                 android:id="@+id/message_details"
@@ -77,17 +102,6 @@
                 app:layout_constraintTop_toTopOf="@+id/message_bckgrnd" />
 
         </android.support.constraint.ConstraintLayout>
-
-        <Button
-            android:id="@+id/share_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="2dp"
-            android:background="@mipmap/ic_share"
-            android:onClick="share" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
