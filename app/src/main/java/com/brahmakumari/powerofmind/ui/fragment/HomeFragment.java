@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,11 +14,13 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.brahmakumari.powerofmind.R;
 import com.brahmakumari.powerofmind.adapter.MiniAudioAdapter;
 import com.brahmakumari.powerofmind.adapter.MiniVideoAdapter;
 import com.brahmakumari.powerofmind.model.Audio;
+import com.brahmakumari.powerofmind.model.Message;
 import com.brahmakumari.powerofmind.model.Video;
 import com.brahmakumari.powerofmind.network.APIService;
 import com.brahmakumari.powerofmind.network.APIServiceAudio;
@@ -64,6 +67,8 @@ public class HomeFragment extends Fragment {
     protected RecyclerView.LayoutManager videolayoutManager;
     List<Video> videos;
     List<Audio> audios;
+    List<Message> messages;
+    TextView thoughttextView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -111,7 +116,16 @@ public class HomeFragment extends Fragment {
         audiolayoutManager=new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rv_mini_audio.setLayoutManager(audiolayoutManager);
 
-
+        thoughttextView = (TextView) view.findViewById(R.id.thoughttextView);
+        thoughttextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new MessageFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+        });
         return view;
 
     }
@@ -191,6 +205,11 @@ public class HomeFragment extends Fragment {
         ic_right_arrow.startAnimation(ani_hor_right);
         ic_down_arrow.startAnimation(ani_ver_down);
         ic_up_arrow.startAnimation(ani_ver_up);
+    }
+
+    public void setThought(){
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

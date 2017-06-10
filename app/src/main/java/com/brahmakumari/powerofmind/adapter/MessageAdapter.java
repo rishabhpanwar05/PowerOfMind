@@ -5,6 +5,7 @@ import android.content.Intent;
 
 
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.brahmakumari.powerofmind.R;
 import com.brahmakumari.powerofmind.model.Message;
+import com.brahmakumari.powerofmind.ui.activity.DisplayMessage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -71,9 +73,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewInfo
     }
 
     @Override
-    public void onBindViewHolder(ViewInfoHolder holder, int position) {
+    public void onBindViewHolder(ViewInfoHolder holder, final int position) {
         holder.message_details.setText(messages.get(position).getMessage());
-        holder.message_date.setText(messages.get(position).getDate().split("T")[0]);
+        holder.message_date.setText(messages.get(position).getDate());
         Url=messages.get(position).getImagePath();
 
         Picasso.with(ctx)
@@ -86,6 +88,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewInfo
             @Override
             public void onClick(View v) {
                 shareIt(string,Url);
+            }
+        });
+
+        holder.message_constraintlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ctx, DisplayMessage.class);
+                intent.putExtra("url",messages.get(position).getImagePath());
+                intent.putExtra("date",""+messages.get(position).getDate());
+                intent.putExtra("msg",""+messages.get(position).getMessage());
+                ctx.startActivity(intent);
             }
         });
 
@@ -102,12 +115,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewInfo
         protected TextView message_details,message_date;
         protected ImageView message_bckgrnd;
         Button share_btn;
+        protected ConstraintLayout message_constraintlayout;
         public ViewInfoHolder(View itemView)
         {
             super(itemView);
             message_details = (TextView) itemView.findViewById(R.id.message_details);
             message_date = (TextView) itemView.findViewById(R.id.message_date);
             message_bckgrnd=(ImageView) itemView.findViewById(R.id.message_bckgrnd);
+            message_constraintlayout=(ConstraintLayout) itemView.findViewById(R.id.msg_constraintlayout);
             share_btn=(Button) itemView.findViewById(R.id.share_btn);
         }
 

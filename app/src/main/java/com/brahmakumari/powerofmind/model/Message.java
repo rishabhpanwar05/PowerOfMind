@@ -22,7 +22,7 @@ public class Message {
     }
 
     public String getDate() {
-        return date;
+        return date.split("T")[0];
     }
 
     public void setDate(String date) {
