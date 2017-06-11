@@ -10,7 +10,6 @@ public class Message {
     private String message;
     private String date;
     private String imagePath;
-    private List<Message> results;
 
 
     public String getMessage() {
@@ -25,12 +24,5 @@ public class Message {
         return imagePath;
     }
 
-    public List<Message> getResults() {
-        return results;
-    }
-
-    public void setResults(List<Message> results) {
-        this.results = results;
-    }
 
 }

@@ -1,6 +1,6 @@
 package com.brahmakumari.powerofmind.network;
 
-import com.brahmakumari.powerofmind.model.Video;
+import com.brahmakumari.powerofmind.model.LiveDarshan;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ import retrofit2.http.POST;
 public interface APIServiceLiveDarshan {
 
     @POST("liveDarshan")
-    Call<List<Video>> getVideoList();
+    Call<List<LiveDarshan>> getLiveList();
 }

@@ -49,7 +49,6 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.ViewInfoHold
     }
 
     public void demo(final ViewInfoHolder holder,final int position) {
-        //holder.audio_download_btn.setEnabled(false);
         holder.audio_download_btn.setImageResource(R.drawable.ic_play);
     }
     @Override

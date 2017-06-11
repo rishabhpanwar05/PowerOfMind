@@ -47,7 +47,8 @@
         <activity
             android:name=".ui.activity.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".ui.activity.DisplayMessage"></activity>
+        <activity android:name=".ui.activity.DisplayMessage" />
+        <activity android:name=".ui.activity.LiveDarshanSingle"></activity>
     </application>
 
 </manifest>

@@ -11,7 +11,6 @@ public class News {
     private String date;
     private String description;
     private String imagePath;
-    private List<News> results;
 
     public String getImagePath() {
         return imagePath;

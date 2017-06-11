@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brahmakumari.powerofmind.R;
+import com.brahmakumari.powerofmind.adapter.LDAdapter;
 import com.brahmakumari.powerofmind.adapter.LiveDarshanAdapter;
-import com.brahmakumari.powerofmind.model.Video;
+import com.brahmakumari.powerofmind.model.LiveDarshan;
 import com.brahmakumari.powerofmind.network.APIService;
 import com.brahmakumari.powerofmind.network.APIServiceLiveDarshan;
 
@@ -36,10 +37,10 @@ public class DarshanFragment extends Fragment {
 
 
     public RecyclerView rv;
-    private LiveDarshanAdapter liveDarshanAdapter;
+    private LDAdapter ldAdapter;
     protected RecyclerView.LayoutManager layoutManager;
 
-    List<Video> videos;
+    List<LiveDarshan> darshans;
 
     private OnFragmentInteractionListener mListener;
 
@@ -82,32 +83,32 @@ public class DarshanFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
-        getVideoList();
+        getLiveList();
     }
     public void showList()
     {
-        liveDarshanAdapter=new LiveDarshanAdapter(getActivity(),videos);
-        rv.setAdapter(liveDarshanAdapter);
+        ldAdapter=new LDAdapter(getContext(),darshans);
+        rv.setAdapter(ldAdapter);
     }
 
-    public void getVideoList()
+    public void getLiveList()
     {
 
         Retrofit retrofit= APIService.getClient();
         APIServiceLiveDarshan apiServiceLiveDarshan =
                 retrofit.create(APIServiceLiveDarshan.class);
 
-        Call<List<Video>> call = apiServiceLiveDarshan.getVideoList();
-        call.enqueue(new Callback<List<Video>>() {
+        Call<List<LiveDarshan>> call = apiServiceLiveDarshan.getLiveList();
+        call.enqueue(new Callback<List<LiveDarshan>>() {
             @Override
-            public void onResponse(Call<List<Video>> call, Response<List<Video>> response)
+            public void onResponse(Call<List<LiveDarshan>> call, Response<List<LiveDarshan>> response)
             {
-                videos=response.body();
+                darshans=response.body();
                 showList();
             }
 
             @Override
-            public void onFailure(Call<List<Video>> call, Throwable t) {
+            public void onFailure(Call<List<LiveDarshan>> call, Throwable t) {
             }
         });
     }

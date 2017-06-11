@@ -20,8 +20,6 @@ public class DisplayMessage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
-        Log.i("Dem:","AVC");
-
         iv=(ImageView)findViewById(R.id.message_bckgrnd);
         msg_tv=(TextView) findViewById(R.id.message_details);
         date_tv=(TextView)findViewById(R.id.message_date);
@@ -31,8 +29,6 @@ public class DisplayMessage extends AppCompatActivity {
         String Url=getApplicationContext().getString(R.string.server_url)+intent.getStringExtra("url");
         String msg=intent.getStringExtra("msg");
         String date=intent.getStringExtra("date");
-
-        Log.i("Dem:","AVCdef");
 
         Picasso.with(getApplicationContext())
                 .load(Url)
