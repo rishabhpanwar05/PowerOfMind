@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brahmakumari.powerofmind.R;
-import com.brahmakumari.powerofmind.adapter.LDAdapter;
 import com.brahmakumari.powerofmind.adapter.LiveDarshanAdapter;
 import com.brahmakumari.powerofmind.model.LiveDarshan;
 import com.brahmakumari.powerofmind.network.APIService;
@@ -23,28 +22,27 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DarshanFragment.OnFragmentInteractionListener} interface
+ * {@link LiveDarshanFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DarshanFragment#newInstance} factory method to
+ * Use the {@link LiveDarshanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DarshanFragment extends Fragment {
+public class LiveDarshanFragment extends Fragment {
 
 
     public RecyclerView rv;
-    private LDAdapter ldAdapter;
+    private LiveDarshanAdapter liveDarshanAdapter;
     protected RecyclerView.LayoutManager layoutManager;
 
     List<LiveDarshan> darshans;
 
     private OnFragmentInteractionListener mListener;
 
-    public DarshanFragment() {
+    public LiveDarshanFragment() {
         // Required empty public constructor
     }
 
@@ -54,11 +52,11 @@ public class DarshanFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DarshanFragment.
+     * @return A new instance of fragment LiveDarshanFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DarshanFragment newInstance(String param1, String param2) {
-        DarshanFragment fragment = new DarshanFragment();
+    public static LiveDarshanFragment newInstance(String param1, String param2) {
+        LiveDarshanFragment fragment = new LiveDarshanFragment();
         Bundle args = new Bundle();
 
         return fragment;
@@ -87,8 +85,8 @@ public class DarshanFragment extends Fragment {
     }
     public void showList()
     {
-        ldAdapter=new LDAdapter(getContext(),darshans);
-        rv.setAdapter(ldAdapter);
+        liveDarshanAdapter =new LiveDarshanAdapter(getContext(),darshans);
+        rv.setAdapter(liveDarshanAdapter);
     }
 
     public void getLiveList()

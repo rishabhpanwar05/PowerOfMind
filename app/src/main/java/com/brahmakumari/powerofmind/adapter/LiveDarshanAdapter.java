@@ -1,108 +1,88 @@
 package com.brahmakumari.powerofmind.adapter;
 
-/**
- * Created by rishabhpanwar on 02/04/17.
- */
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import com.brahmakumari.powerofmind.R;
-import com.brahmakumari.powerofmind.model.Video;
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
-import com.google.android.youtube.player.YouTubeThumbnailLoader;
-import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.brahmakumari.powerofmind.model.LiveDarshan;
+import com.brahmakumari.powerofmind.ui.activity.LiveDarshanSingle;
 
 import java.util.List;
 
-public class LiveDarshanAdapter extends RecyclerView.Adapter<LiveDarshanAdapter.VideoInfoHolder>
+/**
+ * Created by rishabhpanwar on 09/04/17.
+ */
+
+public class LiveDarshanAdapter extends RecyclerView.Adapter<LiveDarshanAdapter.ViewInfoHolder>
 {
-
+    List<LiveDarshan> lds;
     Context ctx;
-    List<Video> videos;
-    private static String KEY = "AIzaSyCR5kq0Y53GsZt_ByGSN79JX-H1VqAKauA";
 
-    public LiveDarshanAdapter(Context context, List<Video> videos) {
+    public LiveDarshanAdapter(Context context, List<LiveDarshan> lds) {
         this.ctx = context;
-        this.videos=videos;
+        this.lds=lds;
     }
 
     @Override
-    public VideoInfoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewInfoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_live_darshan, parent, false);
-        return new VideoInfoHolder(itemView);
+        return new LiveDarshanAdapter.ViewInfoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final VideoInfoHolder holder, final int position)
-    {
-        holder.liveDarshanTitle_tv.setText(videos.get(position).getTitle());
+    public void onBindViewHolder(final ViewInfoHolder holder, final int position) {
 
-        final YouTubeThumbnailLoader.OnThumbnailLoadedListener onThumbnailLoadedListener = new YouTubeThumbnailLoader.OnThumbnailLoadedListener() {
+        final String ld_title=lds.get(position).getTitle();
+        final String ld_location=lds.get(position).getTitle();
+        final String ld_time=lds.get(position).getTitle();
+        final String ld_desc=lds.get(position).getDesc();
+        final String ld_videoPath=lds.get(position).getVideoPath();
+        holder.ld_title.setText(ld_title);
 
+        holder.ld_location.setText(ld_desc);       //Changes to be made
+        holder.ld_time.setText(ld_title);
+
+        holder.live_darshan_mini_layout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onThumbnailError(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader.ErrorReason errorReason) {
-
-            }
-            @Override
-            public void onThumbnailLoaded(YouTubeThumbnailView youTubeThumbnailView, String s) {
-                youTubeThumbnailView.setVisibility(View.VISIBLE);
-                holder.relativeLayoutOverYouTubeThumbnailView.setVisibility(View.VISIBLE);
-            }
-        };
-
-        holder.youTubeThumbnailView.initialize(KEY, new YouTubeThumbnailView.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubeThumbnailView youTubeThumbnailView, YouTubeThumbnailLoader youTubeThumbnailLoader) {
-                youTubeThumbnailLoader.setVideo(videos.get(position).getVideoPath());
-                youTubeThumbnailLoader.setOnThumbnailLoadedListener(onThumbnailLoadedListener);
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubeThumbnailView youTubeThumbnailView, YouTubeInitializationResult youTubeInitializationResult) {
-                //write something for failure
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(ctx,LiveDarshanSingle.class);
+                intent.putExtra("title",ld_title);
+                intent.putExtra("desc",ld_desc);
+                intent.putExtra("time",ld_time);
+                intent.putExtra("location",ld_location);
+                intent.putExtra("videoPath",ld_videoPath);
+                ctx.startActivity(intent);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
-        return videos.size();
+        return lds.size();
     }
 
-    public class VideoInfoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewInfoHolder extends RecyclerView.ViewHolder
+    {
+        TextView ld_title,ld_location,ld_time;
+        CardView live_darshan_mini_layout;
 
-        protected RelativeLayout relativeLayoutOverYouTubeThumbnailView;
-        YouTubeThumbnailView youTubeThumbnailView;
-        protected ImageView playButton;
-        protected TextView liveDarshanTitle_tv;
-        protected ImageView img_thumbnail;
-
-        public VideoInfoHolder(View itemView) {
+        public ViewInfoHolder(final View itemView)
+        {
             super(itemView);
-            playButton = (ImageView) itemView.findViewById(R.id.btnYoutube_player);
-            liveDarshanTitle_tv = (TextView) itemView.findViewById(R.id.liveDarshanTitle_tv);
-            playButton.setOnClickListener(this);
-            relativeLayoutOverYouTubeThumbnailView = (RelativeLayout) itemView.findViewById(R.id.relativeLayout_over_youtube_thumbnail);
-            youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail);
-            img_thumbnail = (ImageView)itemView.findViewById(R.id.img_thumnail);
+            ld_title=(TextView) itemView.findViewById(R.id.ld_title);
+            ld_location=(TextView) itemView.findViewById(R.id.ld_location);
+            ld_time=(TextView) itemView.findViewById(R.id.ld_time);
+            live_darshan_mini_layout=(CardView)itemView.findViewById(R.id.live_darshan_mini_layout);
         }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) ctx, KEY,videos.get(getLayoutPosition()).getVideoPath());
-            ctx.startActivity(intent);
-        }
-
-
     }
+
 }

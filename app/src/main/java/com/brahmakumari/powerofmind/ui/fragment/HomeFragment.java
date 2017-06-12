@@ -1,8 +1,10 @@
 package com.brahmakumari.powerofmind.ui.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,10 +55,6 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     ImageView ic_up_arrow,ic_down_arrow,ic_right_arrow,ic_left_arrow;
 
-
-    //private static final String[] aud_titles={"Channa Mereya","Shape of You","Humnava","Bailando"
-           // ,"Humsafar","RockABye","Te Amo","Break Up Song"};
-
     public RecyclerView rv_mini_audio;
     private MiniAudioAdapter miniAudioAdapter;
     protected RecyclerView.LayoutManager audiolayoutManager;
@@ -67,7 +65,6 @@ public class HomeFragment extends Fragment {
     protected RecyclerView.LayoutManager videolayoutManager;
     List<Video> videos;
     List<Audio> audios;
-    List<Message> messages;
     TextView thoughttextView;
 
     private OnFragmentInteractionListener mListener;
@@ -142,6 +139,15 @@ public class HomeFragment extends Fragment {
 
         miniAudioAdapter=new MiniAudioAdapter(getActivity(),audios);
         rv_mini_audio.setAdapter(miniAudioAdapter);
+    }
+
+    public void onAudioClick(){
+        rv_mini_audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
+            }
+        });
     }
 
     public void getVideoList()
