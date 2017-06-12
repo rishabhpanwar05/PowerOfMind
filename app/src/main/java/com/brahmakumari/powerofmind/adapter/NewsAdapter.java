@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,8 @@ import java.util.List;
  * Created by ishitabhandari on 08/06/17.
  */
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewInfoHolder>{
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewInfoHolder>
+{
         List<News> news;
         Context ctx;
         String Url;
@@ -38,9 +40,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewInfoHolder
 
         @Override
         public void onBindViewHolder(ViewInfoHolder holder, int position) {
-        holder.news_title.setText(news.get(position).getTitle());
-        holder.news_desc.setText(news.get(position).getDescription());
-        holder.news_date.setText(news.get(position).getDate().split("T")[0]);
+        holder.news_title_tv.setText(news.get(position).getTitle());
+        holder.news_desc_wv.loadData(news.get(position).getDescription(),"text/html;charset=utf-8","utf-8");
+        holder.news_date.setText(news.get(position).getDate());
         Url=news.get(position).getImagePath();
 
         Picasso.with(ctx)
@@ -55,13 +57,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewInfoHolder
 
         public class ViewInfoHolder extends RecyclerView.ViewHolder
         {
-        protected TextView news_title,news_date, news_desc;
+        protected TextView news_title_tv,news_date;
+        protected  WebView news_desc_wv;
         protected ImageView news_image;
             public ViewInfoHolder(View itemView)
             {
             super(itemView);
-            news_title = (TextView) itemView.findViewById(R.id.message_details);
-            news_desc = (TextView) itemView.findViewById(R.id.news_desc);
+            news_title_tv = (TextView) itemView.findViewById(R.id.news_title);
+            news_desc_wv = (WebView) itemView.findViewById(R.id.news_desc);
             news_image=(ImageView) itemView.findViewById(R.id.news_image);
             news_date = (TextView) itemView.findViewById(R.id.news_date);
              }

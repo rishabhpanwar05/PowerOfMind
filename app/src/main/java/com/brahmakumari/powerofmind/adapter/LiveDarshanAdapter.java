@@ -44,9 +44,10 @@ public class LiveDarshanAdapter extends RecyclerView.Adapter<LiveDarshanAdapter.
         final String ld_time=lds.get(position).getTitle();
         final String ld_desc=lds.get(position).getDesc();
         final String ld_videoPath=lds.get(position).getVideoPath();
+
         holder.ld_title.setText(ld_title);
 
-        holder.ld_location.setText(ld_desc);       //Changes to be made
+        holder.ld_location.setText(ld_title);       //Changes to be made
         holder.ld_time.setText(ld_title);
 
         holder.live_darshan_mini_layout.setOnClickListener(new View.OnClickListener() {

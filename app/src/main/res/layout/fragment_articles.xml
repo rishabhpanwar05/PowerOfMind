@@ -18,15 +18,10 @@
         android:textColor="@android:color/white"
         android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/comingSoon_TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:text="Coming Soon!"
-        android:textColor="@color/miniAudioRed"
-        android:textSize="18sp" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/articles_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

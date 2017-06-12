@@ -3,21 +3,16 @@ package com.brahmakumari.powerofmind.model;
 import java.util.List;
 
 /**
- * Created by ishitabhandari on 08/06/17.
+ * Created by ishitabhandari on 10/06/17.
  */
 
-public class News {
+public class Articles {
     private String title;
-    private String date;
-    private String desc;
+    private String description;
     private String imagePath;
 
     public String getImagePath() {
         return imagePath;
-    }
-
-    public String getDate() {
-        return date.split("T")[0];
     }
 
     public String getTitle() {
@@ -25,9 +20,7 @@ public class News {
     }
 
     public String getDescription() {
-        return desc;
+        return description;
     }
-
-
 
 }

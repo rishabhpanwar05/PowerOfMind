@@ -4,11 +4,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.brahmakumari.powerofmind.R;
+import com.brahmakumari.powerofmind.adapter.ArticlesAdapter;
+import com.brahmakumari.powerofmind.model.Articles;
+import com.brahmakumari.powerofmind.network.APIService;
+import com.brahmakumari.powerofmind.network.APIServiceArticles;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,9 +38,9 @@ public class ArticlesFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    List<Articles> articles;
+    public RecyclerView recyclerView;
+    private ArticlesAdapter articlesAdapter;
     private OnFragmentInteractionListener mListener;
 
     public ArticlesFragment() {
@@ -55,17 +68,52 @@ public class ArticlesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_articles, container, false);
+        View view= inflater.inflate(R.layout.fragment_articles, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.articles_rv);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        return view;
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        getArticlesList();
+    }
+
+    public void getArticlesList() {
+
+        Retrofit retrofit= APIService.getClient();
+
+        APIServiceArticles apiServiceNews =
+                retrofit.create(APIServiceArticles.class);
+
+        Call<List<Articles>> call = apiServiceNews.getArticlesList();
+
+        call.enqueue(new Callback<List<Articles>>() {
+            @Override
+            public void onResponse(Call<List<Articles>> call, Response<List<Articles>> response)
+            {
+                articles=response.body();
+                showList();
+            }
+
+            @Override
+            public void onFailure(Call<List<Articles>> call, Throwable t) {
+            }
+        });
+    }
+
+    private void showList() {
+        ArticlesAdapter articlesAdapter = new ArticlesAdapter(getActivity(), articles);
+        recyclerView.setAdapter(articlesAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
