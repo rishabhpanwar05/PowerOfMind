@@ -97,14 +97,13 @@ public class MiniVideoAdapter extends RecyclerView.Adapter<MiniVideoAdapter.Vide
             home_video_iv.setOnClickListener(this);
             relativeLayoutOverYouTubeThumbnailView = (RelativeLayout) itemView.findViewById(R.id.relativeLayout_over_youtube_thumbnail_mini);
             youTubeThumbnailView = (YouTubeThumbnailView) itemView.findViewById(R.id.youtube_thumbnail_mini);
+            youTubeThumbnailView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) ctx, KEY,videos.get(getLayoutPosition()).getVideoPath());
+            Intent intent = YouTubeStandalonePlayer.createVideoIntent((Activity) ctx, KEY, videos.get(getLayoutPosition()).getVideoPath());
             ctx.startActivity(intent);
         }
-
-
     }
 }

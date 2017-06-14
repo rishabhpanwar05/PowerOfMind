@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface APIServiceMessage {
 
-    @POST("message1")
+    @POST("messagelast")
     Call<List<Message>> getMessageList();
 
 }

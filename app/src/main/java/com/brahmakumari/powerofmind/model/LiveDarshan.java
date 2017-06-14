@@ -9,6 +9,31 @@ public class LiveDarshan {
     String title;
     String videoPath;
     String desc;
+    String date,time,venue;
+
+    public String getDate() {
+        return date.split("T")[0];
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
 
     public String getDesc() {
         return desc;

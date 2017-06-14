@@ -1,10 +1,11 @@
 package com.brahmakumari.powerofmind.ui.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +36,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +54,10 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     ImageView ic_up_arrow,ic_down_arrow,ic_right_arrow,ic_left_arrow;
+
+    Button meditation_Button,discovery_Button,hope_Button,wisdom_Button;
 
     public RecyclerView rv_mini_audio;
     private MiniAudioAdapter miniAudioAdapter;
@@ -94,13 +98,17 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_home, container, false);
+
+        meditation_Button=(Button) view.findViewById(R.id.meditation_Button);
+        discovery_Button=(Button) view.findViewById(R.id.discovery_Button);
+        hope_Button=(Button) view.findViewById(R.id.hope_Button);
+        wisdom_Button=(Button) view.findViewById(R.id.wisdom_Button);
 
         homeAnimation(view);
 
@@ -116,13 +124,53 @@ public class HomeFragment extends Fragment {
         thoughttextView = (TextView) view.findViewById(R.id.thoughttextView);
         thoughttextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Fragment fragment = new MessageFragment();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
                 ft.replace(R.id.mainFrame, fragment);
                 ft.commit();
             }
         });
+
+        meditation_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new MeditationFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+        });
+        discovery_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new DiscoveryFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+        });
+        hope_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new HopeFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+        });
+        wisdom_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new WisdomFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+        });
+
+
         return view;
 
     }
@@ -131,6 +179,39 @@ public class HomeFragment extends Fragment {
         super.onResume();
         getVideoList();
         getAudioList();
+
+        BroadcastReceiver aBroadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //Calling audio fragment here
+                Fragment aud_fragment = new AudioFragment();
+                FragmentTransaction ft = getFragmentManager().beginTransaction().addToBackStack(null);
+                ft.replace(R.id.mainFrame, aud_fragment);
+                ft.commit();
+
+            }
+        };
+
+        getContext().registerReceiver(aBroadcastReceiver, new IntentFilter("call.audiofragment.action"));
+
+        MessageFragment msg_fragment= new MessageFragment();
+        Call<List<Message>> call = msg_fragment.getMessageList();
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response)
+            {
+                List<Message> messages=response.body();
+                String thought = messages.get(0).getMessage();
+                Log.i("demo:", thought);
+                thoughttextView.setText(thought);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+            }
+        });
     }
     public void showList()
     {
@@ -139,15 +220,7 @@ public class HomeFragment extends Fragment {
 
         miniAudioAdapter=new MiniAudioAdapter(getActivity(),audios);
         rv_mini_audio.setAdapter(miniAudioAdapter);
-    }
 
-    public void onAudioClick(){
-        rv_mini_audio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(getContext());
-            }
-        });
     }
 
     public void getVideoList()
@@ -197,6 +270,31 @@ public class HomeFragment extends Fragment {
         });
 
     }
+
+    /*public void getMessageList()
+    {
+        Retrofit retrofit= APIService.getClient();
+
+        APIServiceMessage apiServiceMessage =
+                retrofit.create(APIServiceMessage.class);
+
+        Call<List<Message>> call = apiServiceMessage.getMessageList();
+
+        call.enqueue(new Callback<List<Message>>() {
+            @Override
+            public void onResponse(Call<List<Message>> call, Response<List<Message>> response)
+            {
+                cur_message=response.body();
+                showList();
+            }
+
+            @Override
+            public void onFailure(Call<List<Message>> call, Throwable t) {
+            }
+        });
+    }*/
+
+
     public void homeAnimation(View view){
 
         ic_down_arrow=(ImageView)view.findViewById(R.id.ic_down_arrow);
@@ -211,11 +309,6 @@ public class HomeFragment extends Fragment {
         ic_right_arrow.startAnimation(ani_hor_right);
         ic_down_arrow.startAnimation(ani_ver_down);
         ic_up_arrow.startAnimation(ani_ver_up);
-    }
-
-    public void setThought(){
-
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event

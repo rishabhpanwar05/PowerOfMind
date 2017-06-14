@@ -17,6 +17,8 @@ import com.brahmakumari.powerofmind.model.Message;
 import com.brahmakumari.powerofmind.network.APIService;
 import com.brahmakumari.powerofmind.network.APIServiceMessage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -56,7 +58,6 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_message, container, false);
-        share = (Button) view.findViewById(R.id.share_btn);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -66,24 +67,7 @@ public class MessageFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
-        getMessageList();
-    }
-
-    public void showList()
-    {
-        messageAdapter = new MessageAdapter(getActivity(), messages);
-        recyclerView.setAdapter(messageAdapter);
-    }
-
-    public void getMessageList()
-    {
-        Retrofit retrofit= APIService.getClient();
-
-        APIServiceMessage apiServiceMessage =
-                retrofit.create(APIServiceMessage.class);
-
-        Call<List<Message>> call = apiServiceMessage.getMessageList();
-
+        Call<List<Message>> call= getMessageList();
         call.enqueue(new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response)
@@ -96,6 +80,22 @@ public class MessageFragment extends Fragment {
             public void onFailure(Call<List<Message>> call, Throwable t) {
             }
         });
+    }
+
+    public void showList()
+    {
+        messageAdapter = new MessageAdapter(getActivity(), messages);
+        recyclerView.setAdapter(messageAdapter);
+    }
+
+    public Call<List<Message>> getMessageList()
+    {
+        Retrofit retrofit= APIService.getClient();
+
+        APIServiceMessage apiServiceMessage =
+                retrofit.create(APIServiceMessage.class);
+
+        return apiServiceMessage.getMessageList();
     }
 
     public void onButtonPressed(Uri uri) {

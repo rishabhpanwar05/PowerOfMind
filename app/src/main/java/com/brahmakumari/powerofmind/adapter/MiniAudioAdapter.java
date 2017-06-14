@@ -1,7 +1,11 @@
 package com.brahmakumari.powerofmind.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +15,9 @@ import android.widget.TextView;
 
 import com.brahmakumari.powerofmind.R;
 import com.brahmakumari.powerofmind.model.Audio;
+import com.brahmakumari.powerofmind.ui.fragment.AudioFragment;
+import com.brahmakumari.powerofmind.ui.fragment.HopeFragment;
+import com.brahmakumari.powerofmind.ui.fragment.MessageFragment;
 
 import java.util.List;
 
@@ -31,18 +38,12 @@ public class MiniAudioAdapter extends RecyclerView.Adapter<MiniAudioAdapter.View
     @Override
     public ViewInfoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_mini_audio, parent, false);
-        final ViewInfoHolder result = new ViewInfoHolder(itemView);
-        itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //Log.d("Pos: ",""+result.getAdapterPosition());
-            }
-        });
         return new MiniAudioAdapter.ViewInfoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewInfoHolder holder, int position) {
+    public void onBindViewHolder(ViewInfoHolder holder, int position)
+    {
         holder.home_audio_tv.setText(audios.get(position).getAudio_title());
 
         if(position%3==0)
@@ -51,6 +52,14 @@ public class MiniAudioAdapter extends RecyclerView.Adapter<MiniAudioAdapter.View
             holder.constraintLayout.setBackgroundResource(R.color.miniAudioGreen);
         else
             holder.constraintLayout.setBackgroundResource(R.color.miniAudioGrey);
+
+        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ctx.sendBroadcast(new Intent("call.audiofragment.action"));
+            }
+        });
+
     }
 
     @Override
@@ -58,8 +67,7 @@ public class MiniAudioAdapter extends RecyclerView.Adapter<MiniAudioAdapter.View
         return audios.size();
     }
 
-    public class ViewInfoHolder extends RecyclerView.ViewHolder
-    {
+    public class ViewInfoHolder extends RecyclerView.ViewHolder {
         protected TextView home_audio_tv;
         ConstraintLayout constraintLayout;
 
@@ -68,6 +76,11 @@ public class MiniAudioAdapter extends RecyclerView.Adapter<MiniAudioAdapter.View
             super(itemView);
             home_audio_tv = (TextView) itemView.findViewById(R.id.home_audio_tv);
             constraintLayout=(ConstraintLayout)itemView.findViewById(R.id.constraint_layout_mini_audio);
+
         }
+
     }
 }
+
+
+

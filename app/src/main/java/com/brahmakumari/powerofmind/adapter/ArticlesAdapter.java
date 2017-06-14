@@ -49,7 +49,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewIn
 
     @Override
     public int getItemCount() {
-        return articles.size();
+        return 0;
     }
 
 

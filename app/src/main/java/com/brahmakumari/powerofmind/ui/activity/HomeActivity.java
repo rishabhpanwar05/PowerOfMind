@@ -15,6 +15,7 @@ import com.brahmakumari.powerofmind.R;
 
 import com.brahmakumari.powerofmind.ui.fragment.AudioFragment;
 import com.brahmakumari.powerofmind.ui.fragment.ArticlesFragment;
+import com.brahmakumari.powerofmind.ui.fragment.CLFragment;
 import com.brahmakumari.powerofmind.ui.fragment.CentreLocatorFragment;
 import com.brahmakumari.powerofmind.ui.fragment.LiveDarshanFragment;
 import com.brahmakumari.powerofmind.ui.fragment.EventsFragment;
@@ -88,7 +89,7 @@ LiveDarshanFragment.OnFragmentInteractionListener,MessageFragment.OnFragmentInte
         } else if (id == R.id.nav_darshan) {
             fragment = new LiveDarshanFragment();
         } else if (id == R.id.nav_centre) {
-            fragment = new CentreLocatorFragment();
+            fragment = new CLFragment();
         } else if (id == R.id.nav_articles) {
             fragment = new ArticlesFragment();
         }

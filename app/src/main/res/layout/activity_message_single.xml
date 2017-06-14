@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brahmakumari.powerofmind.ui.activity.MessageSingle">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/divider"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/message_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingEnd="5dp"
+            android:background="#ffffff"
+            android:paddingStart="5dp"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+            android:id="@+id/message_bckgrnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/msg_bckgrnd"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/message_details"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_bckgrnd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Anger spoils the beauty of the soul, introversion regains it."
+        android:textAlignment="center"
+        android:textColor="@color/colorFontDefault"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

@@ -15,17 +15,17 @@ public class LiveDarshanSingle extends YouTubeBaseActivity implements YouTubePla
 
     private static String KEY = "AIzaSyCR5kq0Y53GsZt_ByGSN79JX-H1VqAKauA";
     String videoID;
-    //TextView tv_title,tv_location,tv_time,tv_desc;
+    TextView tv_title,tv_location,tv_time,tv_desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_darshan_single);
 
-        /*tv_title= (TextView) findViewById(R.id.tv_title);
+        tv_title= (TextView) findViewById(R.id.tv_title);
         tv_location= (TextView) findViewById(R.id.tv_location);
         tv_time= (TextView) findViewById(R.id.tv_time);
-        tv_desc= (TextView) findViewById(R.id.tv_desc);*/
+        tv_desc= (TextView) findViewById(R.id.tv_desc);
 
         Intent intent=getIntent();
         String ld_title=intent.getStringExtra("title");
@@ -39,10 +39,10 @@ public class LiveDarshanSingle extends YouTubeBaseActivity implements YouTubePla
                 findViewById(R.id.videoView);
         youTubeView.initialize(KEY, this);
 
-        /*tv_title.setText(ld_title);
+        tv_title.setText(ld_title);
         tv_location.setText(ld_location);
         tv_desc.setText(ld_desc);
-        tv_time.setText(ld_time);*/
+        tv_time.setText(ld_time);
 
     }
 

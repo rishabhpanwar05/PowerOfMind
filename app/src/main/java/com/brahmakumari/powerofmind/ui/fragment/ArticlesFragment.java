@@ -40,7 +40,6 @@ public class ArticlesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     List<Articles> articles;
     public RecyclerView recyclerView;
-    private ArticlesAdapter articlesAdapter;
     private OnFragmentInteractionListener mListener;
 
     public ArticlesFragment() {
@@ -92,10 +91,10 @@ public class ArticlesFragment extends Fragment {
 
         Retrofit retrofit= APIService.getClient();
 
-        APIServiceArticles apiServiceNews =
+        APIServiceArticles apiServiceArticles =
                 retrofit.create(APIServiceArticles.class);
 
-        Call<List<Articles>> call = apiServiceNews.getArticlesList();
+        Call<List<Articles>> call = apiServiceArticles.getArticlesList();
 
         call.enqueue(new Callback<List<Articles>>() {
             @Override

@@ -8,4 +8,6 @@
     <color name="miniAudioGreen">#c8e589</color>
     <color name="miniAudioRed">#FF5B64</color>
     <color name="miniAudioGrey">#e0e0e0</color>
+
+    <color name="ldblue">#7babed</color>
 </resources>

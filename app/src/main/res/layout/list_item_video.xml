@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="playVideo"
-                android:src="@drawable/ic_play_main"
+                android:src="@mipmap/ic_play"
                 android:layout_marginBottom="75dp"
                 android:layout_above="@+id/videosTitle_tv"
                 android:layout_centerHorizontal="true" />
