@@ -1,5 +1,6 @@
 package com.brahmakumari.powerofmind.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.brahmakumari.powerofmind.R;
 
@@ -24,6 +26,7 @@ public class MeditationFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    WebView program_wv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,9 +70,48 @@ public class MeditationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_meditation, container, false);
-        WebView program_wv=(WebView) view.findViewById(R.id.program_wv);
-        program_wv.loadUrl("http://www.brahmakumaris.org/meditation/raja-yoga-meditation");
+        program_wv=(WebView) view.findViewById(R.id.program_wv);
+        startWebView("http://www.brahmakumaris.org/meditation/raja-yoga-meditation");
         return view;
+    }
+
+    private void startWebView(String url) {
+        program_wv.setWebViewClient(new WebViewClient() {
+            ProgressDialog progressDialog;
+
+            //If you will not use this method url links are opeen in new brower not in webview
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            //Show loader on url load
+            public void onLoadResource (WebView view, String url) {
+                if (progressDialog == null) {
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+            public void onPageFinished(WebView view, String url) {
+                try{
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }catch(Exception exception){
+                    exception.printStackTrace();
+                }
+            }
+
+        });
+
+        // Settings enabled on webview
+        program_wv.getSettings().setJavaScriptEnabled(true);
+        program_wv.getSettings().setLoadWithOverviewMode(true);
+        program_wv.getSettings().setUseWideViewPort(true);
+        program_wv.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        program_wv.getSettings().setBuiltInZoomControls(true);
+        program_wv.loadUrl(url);
     }
 
     /**

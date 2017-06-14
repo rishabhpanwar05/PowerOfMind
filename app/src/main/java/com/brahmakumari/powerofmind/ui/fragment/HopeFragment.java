@@ -1,5 +1,6 @@
 package com.brahmakumari.powerofmind.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.brahmakumari.powerofmind.R;
 
@@ -23,6 +25,7 @@ public class HopeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    WebView program_wv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,11 +69,49 @@ public class HopeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          View view = inflater.inflate(R.layout.fragment_hope, container, false);
-        WebView program_wv=(WebView) view.findViewById(R.id.program_wv);
-        program_wv.loadUrl("http://www.brahmakumaris.org/hope/youth/young-leaders");
+        program_wv=(WebView) view.findViewById(R.id.program_wv);
+        startWebView("http://www.brahmakumaris.org/hope/youth/young-leaders");
         return view;
     }
 
+    private void startWebView(String url) {
+        program_wv.setWebViewClient(new WebViewClient() {
+            ProgressDialog progressDialog;
+
+            //If you will not use this method url links are opeen in new brower not in webview
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            //Show loader on url load
+            public void onLoadResource (WebView view, String url) {
+                if (progressDialog == null) {
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+            public void onPageFinished(WebView view, String url) {
+                try{
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }catch(Exception exception){
+                    exception.printStackTrace();
+                }
+            }
+
+        });
+
+        // Settings enabled on webview
+        program_wv.getSettings().setJavaScriptEnabled(true);
+        program_wv.getSettings().setLoadWithOverviewMode(true);
+        program_wv.getSettings().setUseWideViewPort(true);
+        program_wv.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        program_wv.getSettings().setBuiltInZoomControls(true);
+        program_wv.loadUrl(url);
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

@@ -1,5 +1,6 @@
 package com.brahmakumari.powerofmind.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.brahmakumari.powerofmind.R;
 
@@ -72,8 +74,47 @@ public class CLFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_cl, container, false);
         centre_locator_wv= (WebView) view.findViewById(R.id.centre_locator_wv);
-        centre_locator_wv.loadUrl("http://www.brahmakumaris.org/centre-locator");
+        startWebView("http://www.brahmakumaris.org/centre-locator");
         return view;
+    }
+
+    private void startWebView(String url) {
+        centre_locator_wv.setWebViewClient(new WebViewClient() {
+            ProgressDialog progressDialog;
+
+            //If you will not use this method url links are opeen in new brower not in webview
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            //Show loader on url load
+            public void onLoadResource (WebView view, String url) {
+                if (progressDialog == null) {
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+            public void onPageFinished(WebView view, String url) {
+                try{
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }catch(Exception exception){
+                    exception.printStackTrace();
+                }
+            }
+
+        });
+
+        // Settings enabled on webview
+        centre_locator_wv.getSettings().setJavaScriptEnabled(true);
+        centre_locator_wv.getSettings().setLoadWithOverviewMode(true);
+        centre_locator_wv.getSettings().setUseWideViewPort(true);
+        centre_locator_wv.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        centre_locator_wv.getSettings().setBuiltInZoomControls(true);
+        centre_locator_wv.loadUrl(url);
     }
 
 

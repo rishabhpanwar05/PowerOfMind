@@ -16,7 +16,6 @@ import com.brahmakumari.powerofmind.R;
 import com.brahmakumari.powerofmind.ui.fragment.AudioFragment;
 import com.brahmakumari.powerofmind.ui.fragment.ArticlesFragment;
 import com.brahmakumari.powerofmind.ui.fragment.CLFragment;
-import com.brahmakumari.powerofmind.ui.fragment.CentreLocatorFragment;
 import com.brahmakumari.powerofmind.ui.fragment.LiveDarshanFragment;
 import com.brahmakumari.powerofmind.ui.fragment.EventsFragment;
 import com.brahmakumari.powerofmind.ui.fragment.HomeFragment;
@@ -27,7 +26,7 @@ import com.brahmakumari.powerofmind.ui.fragment.VideoFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,HomeFragment.OnFragmentInteractionListener,
-ArticlesFragment.OnFragmentInteractionListener,CentreLocatorFragment.OnFragmentInteractionListener,
+ArticlesFragment.OnFragmentInteractionListener,
 LiveDarshanFragment.OnFragmentInteractionListener,MessageFragment.OnFragmentInteractionListener ,
         NewsandEventsFragment.OnFragmentInteractionListener,VideoFragment.OnFragmentInteractionListener,
         AudioFragment.OnFragmentInteractionListener,NewsFragment.OnFragmentInteractionListener,EventsFragment.OnFragmentInteractionListener{

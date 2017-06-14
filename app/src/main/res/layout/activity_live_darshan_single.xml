@@ -55,9 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linlayout"
+        android:padding="15dp"
         android:text="Description"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:padding="15dp"/>
+        android:textAlignment="viewStart"
+        android:gravity="start"
+        android:textSize="18sp" />
 
 </RelativeLayout>
