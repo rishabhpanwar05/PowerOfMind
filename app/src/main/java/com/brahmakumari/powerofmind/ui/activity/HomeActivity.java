@@ -89,9 +89,9 @@ LiveDarshanFragment.OnFragmentInteractionListener,MessageFragment.OnFragmentInte
             fragment = new LiveDarshanFragment();
         } else if (id == R.id.nav_centre) {
             fragment = new CLFragment();
-        } else if (id == R.id.nav_articles) {
+        } /*else if (id == R.id.nav_articles) {
             fragment = new ArticlesFragment();
-        }
+        }*/
 
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

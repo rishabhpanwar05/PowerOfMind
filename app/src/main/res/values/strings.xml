@@ -20,40 +20,4 @@
 
     <string name="server_url">http://139.59.64.145:3000/</string>
 
-    <string name="country_prompt">Select Country</string>
-    <string name="city_prompt">Select City</string>
-
-
-    <string-array name="country_arrays">
-        <item>Select Country</item>
-        <item>India</item>
-        <item>USA</item>
-    </string-array>
-
-
-    <string-array name="city_arrays_india">
-
-        <item>Ahmedabad</item>
-        <item>Indore</item>
-        <item>Jabalpur</item>
-        <item>Mumbai</item>
-        <item>New Delhi</item>
-
-    </string-array>
-    <string-array name="city_arrays_usa">
-
-        <item>DC</item>
-        <item>Indiana</item>
-        <item>Kansas</item>
-        <item>LA</item>
-        <item>Pittsburgh</item>
-
-    </string-array>
-    <string name="title_activity_maps">Map</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="read_more"> Read More...</string>
-
 </resources>
