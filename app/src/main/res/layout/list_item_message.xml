@@ -45,9 +45,8 @@
 
             <ImageView
                 android:id="@+id/message_bckgrnd"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="150dp"
-                android:layout_marginBottom="0dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/msg_bckgrnd"
@@ -55,20 +54,19 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp" />
 
             <TextView
                 android:id="@+id/message_details"
                 style="@android:style/Widget.DeviceDefault.Light.TextView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="5dp"
-                android:layout_marginBottom="0dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:foregroundGravity="center|center_vertical"
                 android:gravity="center"
@@ -78,10 +76,11 @@
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/message_bckgrnd"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintLeft_toLeftOf="@+id/message_bckgrnd"
                 app:layout_constraintRight_toRightOf="@+id/message_bckgrnd"
-                app:layout_constraintTop_toTopOf="@+id/message_bckgrnd" />
+                app:layout_constraintTop_toTopOf="@+id/message_bckgrnd"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp" />
 
         </android.support.constraint.ConstraintLayout>
 
