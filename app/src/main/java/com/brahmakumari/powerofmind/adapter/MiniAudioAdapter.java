@@ -64,7 +64,11 @@ public class MiniAudioAdapter extends RecyclerView.Adapter<MiniAudioAdapter.View
 
     @Override
     public int getItemCount() {
-        return audios.size();
+        int size=0;
+        if(audios!=null){
+            size=audios.size();
+        }
+        return size;
     }
 
     public class ViewInfoHolder extends RecyclerView.ViewHolder {

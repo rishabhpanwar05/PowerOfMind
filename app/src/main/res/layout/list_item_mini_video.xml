@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:clickable="?attr/isLightTheme"
         android:onClick="playVideo"
         android:src="@mipmap/ic_play" />
 
@@ -30,7 +31,7 @@
         android:layout_alignBottom="@+id/youtube_thumbnail_mini"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:alpha="0.5"
+        android:alpha="0.75"
         android:background="@color/colorFontDefault"
         android:gravity="center"
         android:text="Videos title here"

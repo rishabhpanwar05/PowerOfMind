@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.SplashScreen"
+            android:name="com.brahmakumari.powerofmind.ui.activity.SplashScreen"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.HomeActivity"
+            android:name="com.brahmakumari.powerofmind.ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -44,10 +44,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.activity.MessageSingle" />
-        <activity android:name=".ui.activity.LiveDarshanSingle" />
-        <activity android:name=".ui.activity.EventsSingle" />
-        <activity android:name=".ui.activity.NewsSingle" />
+        <activity android:name="com.brahmakumari.powerofmind.ui.activity.MessageSingle" />
+        <activity android:name="com.brahmakumari.powerofmind.ui.activity.LiveDarshanSingle" />
+        <activity android:name="com.brahmakumari.powerofmind.ui.activity.EventsSingle" />
+        <activity android:name="com.brahmakumari.powerofmind.ui.activity.NewsSingle" />
     </application>
 
 </manifest>

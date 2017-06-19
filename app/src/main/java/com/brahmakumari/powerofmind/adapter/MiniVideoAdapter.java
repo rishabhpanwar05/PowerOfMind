@@ -80,7 +80,11 @@ public class MiniVideoAdapter extends RecyclerView.Adapter<MiniVideoAdapter.Vide
 
     @Override
     public int getItemCount() {
-        return videos.size();
+        int size=0;
+        if (videos!=null){
+            size=videos.size();
+        }
+        return size;
     }
 
     public class VideoInfoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
